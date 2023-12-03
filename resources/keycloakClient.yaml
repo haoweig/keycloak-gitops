@@ -1,0 +1,22 @@
+kind: KeycloakClient
+apiVersion: keycloak.org/v1alpha1
+metadata:
+  name: haowei-secret
+  labels:
+    app: sso
+  namespace: keycloak
+spec:
+  realmSelector:
+    matchLabels:
+      app: haowei
+  client:
+    standardFlowEnabled: true
+    directAccessGrantsEnabled: true
+    clientId: solace
+    secret: client-secret
+    clientAuthenticatorType: client-secret
+    publicClient: true 
+    redirectUris: 
+      - "*"
+    defaultClientScopes:
+      - solace_scope

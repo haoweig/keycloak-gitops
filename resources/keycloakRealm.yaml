@@ -1,0 +1,32 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakRealm
+metadata:
+  name: haowei-keycloakrealm  
+  namespace: keycloak
+  finalizers:
+    - realm.cleanup
+  labels:
+    app: haowei
+spec:
+  instanceSelector:
+    matchLabels:
+      app: sso
+  realm:
+    clientScopes:
+      - name: solace_scope
+        protocol: openid-connect
+        protocolMappers:
+          - config:
+              access.token.claim: 'true'
+              claim.name: groups
+              full.path: 'false'
+              id.token.claim: 'true'
+              userinfo.token.claim: 'true'
+            consentRequired: false
+            name: haowei-groups
+            protocol: openid-connect
+            protocolMapper: oidc-group-membership-mapper
+    displayName: Basic Realm for Testing
+    enabled: true
+    id: basic
+    realm: basic

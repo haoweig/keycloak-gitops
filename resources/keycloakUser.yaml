@@ -1,0 +1,24 @@
+kind: KeycloakUser
+apiVersion: keycloak.org/v1alpha1
+metadata:
+  name: haowei-realm-user
+  labels:
+    app: sso
+  namespace: keycloak
+spec:
+  user:
+    username: haowei
+    firstName: HaoWei
+    lastName: Goh
+    email: haoweigoh@example.com
+    groups:
+      - testgroup
+    enabled: true
+    emailVerified: false
+    credentials:
+      - temporary: false
+        type: password
+        value: password
+  realmSelector:
+    matchLabels:
+      app: haowei
